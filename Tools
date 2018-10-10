@@ -1,0 +1,44 @@
+package org.gdufs.pub;
+
+import java.util.Scanner;
+
+public class Tools {
+    final static int START_TAX = 3500;
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        String flag = "y";
+        while (!flag.equals("n")) {
+            System.out.println("请输入工资：");
+            double salary = input.nextDouble();
+            double tax;
+            Tools t = new Tools();
+            tax = computeTax(salary);
+            System.out.println(tax);
+            System.out.println("输入n退出，输入其他字符可继续计算");
+            flag = input.next();
+        }
+}
+
+public static double computeTax (double salary) {
+        double temp = salary - START_TAX;
+        double tax;
+        if (temp <= 0) {
+            tax = 0;
+        } else if (temp <= 1500) {
+            tax = temp * 0.03;
+        } else if (temp <= 4500) {
+            tax = temp * 0.1 - 105;
+        } else if (temp <= 9000) {
+            tax = temp * 0.2 - 555;
+        } else if (temp <= 35000) {
+            tax = temp * 0.25 - 1005;
+        } else if (temp <= 55000) {
+            tax = temp * 0.3 - 2755;
+        } else if (temp <= 80000) {
+            tax = temp * 0.35 - 5505;
+        } else {
+            tax = temp * 0.45 - 13505;
+        }
+        return tax;
+    }
+}
