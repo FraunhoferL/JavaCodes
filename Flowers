@@ -1,0 +1,39 @@
+public class Flower {
+    public static void main(String[] args) {
+        double[][] flowers = {{0.611111111,0.5,0.694915254,0.791666667},
+                {0.555555556,0.291666667,0.661016949,0.708333333},
+                {0.138888889,0.583333333,0.101694915,0.041666667},
+                {0.666666667,0.541666667,0.796610169,0.833333333},
+                {0.416666667,0.291666667,0.694915254,0.75},
+                {0.416666667,0.291666667,0.694915254,0.75},
+                {0.722222222,0.458333333,0.694915254,0.916666667}};
+        double[] sum;
+        sum = new double[7];
+        double[] average;
+        average = new double[7];
+        for(int i = 0;i< 7;i++){
+            for(int j = 0;j < 7;j++) {
+                if(i == j) {
+                    continue;
+                }
+                double distance = compute(flowers[i][0], flowers[i][1], flowers[i][2], flowers[i][3],
+                        flowers[j][0], flowers[j][1], flowers[j][2], flowers[j][3]);
+                sum[i] = sum[i] + distance;
+            }
+        }
+        double max = 0;
+        int position = 0;
+        for(int k = 0;k < 7;k++) {
+            average[k] = sum[k] / 6;
+            if(average[k] > max){
+                max = average[k];
+                position = k;
+            }
+        }
+        System.out.println(position + 1);
+    }
+    //计算距离
+    public static double compute(double a1, double b1,double c1,double d1,double a2,double b2,double c2,double d2){
+        return Math.sqrt((a1 - a2)*(a1 - a2) + (b1 - b2)*(b1 -b2) + (c1 -c2)*(c1 -c2) + (d1 - d2)*(d1 - d2));
+    }
+}
