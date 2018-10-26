@@ -1,0 +1,70 @@
+package org.gdufs.hr;
+
+import org.gdufs.pub.Tools;
+
+public class Salary {
+    private String employeeId;
+    private double wage;
+    private double tax;
+    private double realWage;
+
+    public void setEmployeeId(String employeeId){
+        this.employeeId = employeeId;
+    }
+    public String getEmployeeId(){
+        return employeeId;
+    }
+
+    public void setWage(double wage){
+        this.wage = wage;
+    }
+    public double getWage(){
+        return wage;
+    }
+
+    public void setTax(){
+        this.tax = Tools.computeTax(wage);
+    }
+    public double getTax(){
+        tax = Tools.computeTax(wage);
+        return tax;
+    }
+
+    public void setRealWage(){
+        this.realWage = wage - Tools.computeTax(wage);
+    }
+    public double getRealWage(){
+        return wage - Tools.computeTax(wage);
+    }
+
+    @Override
+    public String toString() {
+        return getEmployeeId()+getRealWage();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Salary){
+            Salary sal = (Salary)obj;
+            String em1 = sal.getEmployeeId();
+            String em2 = getEmployeeId();
+            return em1.equals(em2);
+        } else{
+            return false;
+        }
+    }
+
+    public static void main(String[] args){
+        Salary sal = new Salary();
+        sal.setEmployeeId("20171003203");
+        sal.setWage(5110);
+        String sal_emI = sal.getEmployeeId();
+        System.out.println(sal_emI);
+        double sal_wage = sal.getWage();
+        System.out.println(sal_wage);
+        double sal_tax = sal.getTax();
+        System.out.println(sal_tax);
+        double sal_realWage = sal.getRealWage();
+        System.out.println(sal_realWage);
+    }
+}
